@@ -1,71 +1,65 @@
-import javax.swing.JOptionPane;
+import javax.swing.*;
+import java.awt.FlowLayout;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        // Menu de seleção dos conversores//
-        Object[] itens = { "currency converter", "temperature converter", "distance converter" };
-        Object selectedValue = JOptionPane.showInputDialog(null,
-                "Please, select a item", "Opçao",
-                JOptionPane.QUESTION_MESSAGE, null,
-                itens, itens[0]);
+        JFrame frame = new JFrame("Converter IO");
+        frame.setVisible(true);
+        frame.setSize(450, 200);
+        frame.setLayout(new FlowLayout());
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        if (selectedValue == "currency converter") {
-            // menu de selecao para as moedas//
-            Object[] opcoes = { "Dolar", "Libra", "Euro", "Real", "Pesos" };
-            Object coin = JOptionPane.showInputDialog(null,
-                    "Please, select a item", "Opçao",
-                    JOptionPane.QUESTION_MESSAGE, null,
-                    opcoes, opcoes[0]);
-            
-            while (true) {
-                try {
-                    String inputValue = JOptionPane.showInputDialog("Favor informe o valor em REAL a ser convertido:");
-                    double valor = Double.parseDouble(inputValue);
-                    if(coin == "Dolar") {
-                        Double resultado = valor / 5.16789;
-                        System.out.println(valor);
-                        JOptionPane.showMessageDialog(null, valor + "R$ convertidos em " + coin + " = " + Math.round(resultado) + "Dolars" , "Conversão", JOptionPane.INFORMATION_MESSAGE);
-                    } else if(coin == "Libra") {
-                        Double resultado = valor / 6.25562;
-                        JOptionPane.showMessageDialog(null, valor + "R$ convertidos em " + coin + " = " + Math.round(resultado) + "Libras" , "Conversão", JOptionPane.INFORMATION_MESSAGE);
+        String[] menu = {"Currency", "Temperature", "Distance"};
+        JComboBox menuPrincipal = new JComboBox(menu);
+        menuPrincipal.addActionListener(menuPrincipal);
+        frame.add(menuPrincipal);
 
-                    } else if (coin == "Euro") {
-                        Double resultado = valor / 5.49784;
-                        JOptionPane.showMessageDialog(null, valor + "R$ convertidos em " + coin + " = " + Math.round(resultado) + "Euros" , "Conversão", JOptionPane.INFORMATION_MESSAGE);
-
-                    } else if (coin == "Real") {
-                        JOptionPane.showMessageDialog(null, valor + "R$ convertidos em " + coin + " = " + valor + "Reais" , "Conversão", JOptionPane.INFORMATION_MESSAGE);
-
-                    } else if (coin == "Pesos Argentinos") {
-                        Double resultado = valor / 0.0267604;
-                        JOptionPane.showMessageDialog(null, valor + "R$ convertidos em " + coin + " = " + Math.round(resultado) + "Pesos Argentinos" , "Conversão", JOptionPane.INFORMATION_MESSAGE);
-                    } else{
-                        JOptionPane.showMessageDialog(null, "Erro na conversão de valores","Error", JOptionPane.ERROR_MESSAGE);
-                    }
-                    break;
-                } catch (NumberFormatException e) {
-                    System.out.println("");
-                    JOptionPane.showMessageDialog(null, "Valor inserido não é uma opção válida","Attention", JOptionPane.ERROR_MESSAGE);
-                }
-            }
-
-        } else if (selectedValue == "temperature converter") {
-            // menu de selecao para temperaturas//
-            Object[] opcoes = { "Celsius", "Farenheit", "Kelvin" };
-            Object temp = JOptionPane.showInputDialog(null,
-                    "Please, select a item", "Opçao",
-                    JOptionPane.QUESTION_MESSAGE, null,
-                    opcoes, opcoes[0]);
-            System.out.println(temp);
-
-        } else if (selectedValue == "distance converter") {
-            // menu de selecao para as distancias//
-            Object[] opcoes = { "Decâmetro", "Hectômetro", "Quilômetro", "Decímetro", "Centímetro", "Milímetro" };
-            Object distance = JOptionPane.showInputDialog(null,
-                    "Please, select a item", "Opçao",
-                    JOptionPane.QUESTION_MESSAGE, null,
-                    opcoes, opcoes[0]);
-            System.out.println(distance);
+        if(menuPrincipal.getSelectedIndex() == 0) {
+            String[] coins = {"Euro", "Libra", "Dolar", "Peso"};
+            JComboBox subMenu = new JComboBox(coins);
+            subMenu.addActionListener(subMenu);
+            frame.add(subMenu);
+        } else if (menuPrincipal.getSelectedIndex() == 1) {
+            String[] temp = {"Celsius", "Farenheit", "Kelvin"};
+            JComboBox subMenu = new JComboBox(temp);
+            subMenu.addActionListener(subMenu);
+            frame.add(subMenu);
+        } else if (menuPrincipal.getSelectedIndex() == 1) {
+            String[] dist = {"dam", "hm", "m", "km"};
+            JComboBox subMenu = new JComboBox(dist);
+            subMenu.addActionListener(subMenu);
+            frame.add(subMenu);
         }
+
+        JTextField value = new JTextField(10);
+        frame.add(value);
+       
+        JButton btnCalc = new JButton("Calcular");
+        frame.add(btnCalc);
+
+        //escolher entre as opcoes currency, distance, temperature//
+        //if("currency") {
+            //solicitar o usuario que insira os valores via input//
+            //selecionar a conversao com base no pedido//
+            //chamada da funcao de execucao passando o parametro//
+            //realiza conversao e monstra na tela//
+
+        //} else if ("distance") {
+            //solicitar o usuario que insira os valores via input//
+            //selecionar a conversao com base no pedido//
+            //chamada da funcao de execucao passando o parametro//
+            //realiza conversao e monstra na tela//
+
+        //} else if ("temperature") {
+            //solicitar o usuario que insira os valores via input//
+            //selecionar a conversao com base no pedido//
+            //chamada da funcao de execucao passando o parametro//
+            //realiza conversao e monstra na tela//
+
+        //}
+
+        //perguntar se quer solicitar uma nova conversao//
+        //caso sim, limpar os campos e pedir para que seja preenchido//
+        //caso nao encerrar o programa//
     }
 }
